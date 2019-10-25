@@ -2,6 +2,8 @@ import subprocess
 import os
 import sys
 
+from subprocess import PIPE
+
 STEPS = "Step:"
 RESULT = "Result:"
 SETUP = "Setup:"
@@ -17,3 +19,5 @@ def enter_depend_test():
 def run_cmd(cmd):
     return subprocess.check_output(cmd.split())
 
+def run_shell(cmd):
+    return subprocess.run(cmd, check=False, shell=True, stdout=PIPE, stderr=PIPE)

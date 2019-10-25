@@ -1,0 +1,78 @@
+params:
+#    test_case: True
+    test_case: False
+    full_matrix: True
+    guest_name: 'vm1'
+    guest_xml: '/tmp/guest.xml'
+    mist_rules: 'split'
+    cleanup: True
+    snapshot_round: 4
+    max_cases: 10
+    drop_env: 10
+
+case:
+    - name: block_pull 
+      params:
+        restart_libvirtd: True
+        snapshot_round: 4
+        extra_check: True
+        maxmemory:
+            slots: 16
+            size: 2525184
+        params_matrix:
+          memballoon:
+            model:
+              - 'none'
+              - 'virtio'
+      test_objs:
+#        - backing_chain.delete_snapshots
+#        - backing_chain.create_snapshot
+        - backing_chain.block_pull_snapshots
+      modules:
+        - vm_basic
+        - backing_chain
+      doc-modules:
+        - vm_basic_doc
+        - backing_chain_doc
+    - name: create_snapshots
+      params:
+        restart_libvirtd: True
+        snapshot_round: 4
+        extra_check: True
+        maxmemory:
+            slots: 16
+            size: 2525184
+        params_matrix:
+          memballoon:
+            model:
+              - 'none'
+              - 'virtio'
+      test_objs:
+        - backing_chain.create_snapshot
+      modules:
+        - vm_basic
+        - backing_chain
+      doc-modules:
+        - vm_basic_doc
+        - backing_chain_doc
+    - name: block_commit
+      params:
+        restart_libvirtd: True
+        snapshot_round: 4
+        extra_check: True
+        maxmemory:
+            slots: 16
+            size: 2525184
+        params_matrix:
+          memballoon:
+            model:
+              - 'none'
+              - 'virtio'
+      test_objs:
+        - backing_chain.block_commit_snapshots
+      modules:
+        - vm_basic
+        - backing_chain
+      doc-modules:
+        - vm_basic_doc
+        - backing_chain_doc

@@ -204,8 +204,8 @@ class Demo(BaseEngine):
         LOGGER.info('Find %d valid cases', len(case_matrix))
 
         # training part
-        # self._training(case_matrix, test_func)
-        # return
+        #self._training(case_matrix, test_func)
+        #return
 
         # TODO use a class to be a cases container
         extra_cases = {}

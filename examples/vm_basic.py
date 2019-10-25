@@ -66,8 +66,10 @@ class undefine_guest(TestObject):
                        ParamsRequire(['guest_name'])])
     def __init__(self):
         self._test_entry.add(Consumer('$guest_name.config', Consumer.REQUIRE))
+        self._test_entry.add(Consumer('$guest_name.with_snapshots', Consumer.REQUIRE_N))
 #        self._test_entry.add(Provider('$guest_name.config', Provider.CLEAR))
         self._test_entry.add(Cut('$guest_name.config'))
+#        self._test_entry.add(Cut('$guest_name.top_disk_changed'))
 
     def __call__(self, params, env):
         cmd = "virsh undefine " + params.guest_name

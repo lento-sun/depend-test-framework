@@ -7,8 +7,11 @@ import os
 import yaml
 import copy
 import importlib
+import contextlib
 
 from .base_class import Params
+from .log import get_logger
+LOGGER = get_logger(__name__)
 
 
 def _check_param(param, name, typ=None):
@@ -73,7 +76,11 @@ def load_template(template_file):
         modules = list(load_modules(_get_and_check(case, 'modules')))
         doc_modules = list(load_modules(_get_and_check(case, 'doc-modules')))
         test_objs = list(load_objs(_get_and_check(case, 'test_objs')))
+        LOGGER.info("11111")
+        LOGGER.info(case)
         if 'params_matrix' in case.keys():
+            LOGGER.info("FULL MATRIX IS: %s"
+                        % full_permutations(case['params_matrix']))
             for extra_params in full_permutations(case['params_matrix']):
                 new_params = Params(params)
                 new_params.update(extra_params)
